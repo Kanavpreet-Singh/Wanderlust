@@ -1,0 +1,194 @@
+<% layout('layouts/boilerplate') -%>
+<style>
+  #filters{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100vw;
+    
+  }
+  .filter{
+    text-align: center;
+    margin-right: 1.5rem;
+    margin-top: 1.75rem;
+    opacity: 0.7;
+  }
+  .filter:hover{
+    opacity: 1;
+    cursor: pointer;
+  }
+  .filter p{
+    font-size: 0.8rem;
+  }
+  .tax-info{
+    display: none;
+    
+  }
+  .tax-toggle{
+    border: 0.11rem solid black;
+    padding: 0.5rem;
+    margin-left: 1rem;
+    
+  }
+  .filter a{
+    display: none;
+    height: 2px;
+    width: 2px;
+  }
+  
+
+</style>
+<body>
+
+  <div id="filters">
+    <div class="filter" data-filter="trending">
+      <i class="fa-solid fa-fire"></i>
+      <p>Trending</p>
+    </div>
+    
+    <div class="filter" data-filter="rooms">
+      <i class="fa-solid fa-bed"></i>
+      <p>Rooms</p>
+    </div>
+    
+    <div class="filter" data-filter="entire-homes">
+      <i class="fa-solid fa-house"></i>
+      <p>Entire Homes</p>
+    </div>
+    
+    <div class="filter" data-filter="cabins">
+      <i class="fa-solid fa-tree"></i>
+      <p>Cabins</p>
+    </div>
+    
+    <div class="filter" data-filter="camping">
+      <i class="fa-solid fa-campground"></i>
+      <p>Camping</p>
+    </div>
+    
+    <div class="filter" data-filter="beachfront">
+      <i class="fa-solid fa-swimmer"></i>
+      <p>Beachfront</p>
+    </div>
+    
+    <div class="filter" data-filter="ski-resorts">
+      <i class="fa-solid fa-snowflake"></i>
+      <p>Ski Resorts</p>
+    </div>
+    
+    <div class="filter" data-filter="near-airports">
+      <i class="fa-solid fa-plane"></i>
+      <p>Near Airports</p>
+    </div>
+    
+    <div class="filter" data-filter="urban-stays">
+      <i class="fa-solid fa-city"></i>
+      <p>Urban Stays</p>
+    </div>
+    
+    <div class="filter" data-filter="luxury-resorts">
+      <i class="fa-solid fa-spa"></i>
+      <p>Luxury Resorts</p>
+    </div>
+    
+    <div class="filter" data-filter="fine-dining">
+      <i class="fa-solid fa-utensils"></i>
+      <p>Fine Dining</p>
+    </div>
+    
+    <div class="filter" data-filter="business-stays">
+      <i class="fa-solid fa-concierge-bell"></i>
+      <p>Business Stays</p>
+    </div>
+    
+    <div class="filter" data-filter="resorts-with-pools">
+      <i class="fa-solid fa-umbrella-beach"></i>
+      <p>Resorts with Pools</p>
+    </div>
+  
+    
+  
+
+    <div class="tax-toggle">
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+        <label class="form-check-label" for="flexSwitchCheckDefault">Display Taxes</label>
+      </div>
+    </div>
+    
+    
+</div>
+<% if (category) { %>
+  <!-- Category heading with margin-bottom to separate it from listings -->
+  <br>
+  <div class="category-display mb-3">
+    <h2><%= category %></h2>
+  </div>
+  <br>
+<% } %>
+
+ 
+
+
+
+
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3" style="margin-top: 2rem; margin-bottom: 1rem;">
+
+  
+
+  <% for (listing of allListings) { %>
+
+    <div class="card all" style="width: 20rem;">
+      <a href="/listings/<%= listing._id %>">
+        <img src="<%= listing.image.url %>" class="card-img-top" alt="...">
+      </a>
+
+      <div class="card-body">
+        <p class="card-text"><b>
+          <%= listing.title %>
+        </b> <br> &#8377;<%= listing.price.toLocaleString("en-IN") %>/night
+          <div class="tax-info">
+            <p>+18% GST</p>
+            <p>Total Amount after taxes: 
+              &#8377;<%= (listing.price + listing.price * 0.18).toFixed(2).toLocaleString("en-IN") %>
+            </p>
+          </div>
+        </p>
+      </div>
+    </div>
+
+  <% } %>
+
+</div>
+
+
+
+    <script>
+      let ts=document.getElementById("flexSwitchCheckDefault")
+      ts.addEventListener("click",()=>{
+        let ti=document.getElementsByClassName("tax-info")
+
+        for(item of ti){
+          if(item.style.display!="inline"){
+            item.style.display="inline"
+          }
+          else{
+            item.style.display="none"
+          }
+        }
+      })
+
+      document.addEventListener('DOMContentLoaded', function() {
+      const filters = document.querySelectorAll('.filter');
+      
+      filters.forEach(filter => {
+        filter.addEventListener('click', function() {
+          const filterType = this.getAttribute('data-filter');
+
+          window.location.href = `/listings/filter/${filterType}`;
+        });
+      });
+    });
+    </script>
+
+  </body>

@@ -1,0 +1,193 @@
+<% layout('layouts/boilerplate') -%>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="row">
+    <div class="col-8 offset-2">
+        <br><br>
+        <h3>Create a New Listing</h3>
+    <form action="/listings" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" class="form-control" placeholder="title" >
+            <div class="valid-feedback">Title looks good! </div>
+        </div>
+        
+        
+        <div class="mb-3">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" class="form-control" placeholder="enter description.." required></textarea>
+           <div class="invalid-feedback"> Enter a description</div>
+        
+        </div>
+        
+        
+        <!-- file image -->
+        <div class="mb-3">
+            <label for="image">Upload Image</label>
+            <input type="file" id="image" name="image" class="form-control" required>
+        </div>
+        
+        <div class="row">
+            <div class="mb-3 col-md-4">
+                <label for="price">Price</label>
+                <input type="number" id="price" name="price" class="form-control" placeholder="Enter price" required>
+                <div class="invalid-feedback"> Invalid Price</div>
+            </div>
+        
+            <div class="mb-3 col-md-6">
+                <label for="location">Location</label>
+                <input type="text" id="location" name="location" class="form-control" placeholder="Enter location" required>
+                <div class="invalid-feedback"> Invalid Location</div>
+            </div>
+        </div>
+        
+        <div class="mb-3">
+            <label for="country">Country</label>
+            <input type="text" id="country" name="country" class="form-control" placeholder="Enter Country" required>
+            <div class="invalid-feedback"> Invalid Country Name</div>
+        </div>
+        <br>
+        <div class="mb-3">
+            <label for="categories" style="font-size: 1.3rem;">Categories</label>
+            
+            <div id="categories" class="container mt-4">
+                <h2 class="mb-4">Select Categories</h2>
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                    <div class="col">
+                        <div class="form-check d-flex align-items-center">
+                            <input type="checkbox" id="trending" name="categories[]" value="Trending" class="form-check-input me-2">
+                            <label for="trending" class="form-check-label d-flex align-items-center">
+                                <i class="bi bi-graph-up me-2"></i>
+                                Trending
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-check d-flex align-items-center">
+                            <input type="checkbox" id="rooms" name="categories[]" value="Rooms" class="form-check-input me-2">
+                            <label for="rooms" class="form-check-label d-flex align-items-center">
+                                <i class="bi bi-door-open me-2"></i>
+                                Rooms
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-check d-flex align-items-center">
+                            <input type="checkbox" id="entire-homes" name="categories[]" value="Entire Homes" class="form-check-input me-2">
+                            <label for="entire-homes" class="form-check-label d-flex align-items-center">
+                                <i class="bi bi-house me-2"></i>
+                                Entire Homes
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-check d-flex align-items-center">
+                            <input type="checkbox" id="cabins" name="categories[]" value="Cabins" class="form-check-input me-2">
+                            <label for="cabins" class="form-check-label d-flex align-items-center">
+                                <i class="bi bi-tree me-2"></i>
+                                Cabins
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-check d-flex align-items-center">
+                            <input type="checkbox" id="camping" name="categories[]" value="Camping" class="form-check-input me-2">
+                            <label for="camping" class="form-check-label d-flex align-items-center">
+                                <i class="bi bi-moon-stars me-2"></i>
+                                Camping
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-check d-flex align-items-center">
+                            <input type="checkbox" id="beachfront" name="categories[]" value="Beachfront" class="form-check-input me-2">
+                            <label for="beachfront" class="form-check-label d-flex align-items-center">
+                                <i class="bi bi-water me-2"></i>
+                                Beachfront
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-check d-flex align-items-center">
+                            <input type="checkbox" id="ski-resorts" name="categories[]" value="Ski Resorts" class="form-check-input me-2">
+                            <label for="ski-resorts" class="form-check-label d-flex align-items-center">
+                                <i class="bi bi-snow me-2"></i>
+                                Ski Resorts
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-check d-flex align-items-center">
+                            <input type="checkbox" id="near-airports" name="categories[]" value="Near Airports" class="form-check-input me-2">
+                            <label for="near-airports" class="form-check-label d-flex align-items-center">
+                                <i class="bi bi-airplane me-2"></i>
+                                Near Airports
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-check d-flex align-items-center">
+                            <input type="checkbox" id="urban-stays" name="categories[]" value="Urban Stays" class="form-check-input me-2">
+                            <label for="urban-stays" class="form-check-label d-flex align-items-center">
+                                <i class="bi bi-building me-2"></i>
+                                Urban Stays
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-check d-flex align-items-center">
+                            <input type="checkbox" id="luxury-resorts" name="categories[]" value="Luxury Resorts" class="form-check-input me-2">
+                            <label for="luxury-resorts" class="form-check-label d-flex align-items-center">
+                                <i class="bi bi-star me-2"></i>
+                                Luxury Resorts
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-check d-flex align-items-center">
+                            <input type="checkbox" id="fine-dining" name="categories[]" value="Fine Dining" class="form-check-input me-2">
+                            <label for="fine-dining" class="form-check-label d-flex align-items-center">
+                                <i class="bi bi-cup-straw me-2"></i>
+                                Fine Dining
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-check d-flex align-items-center">
+                            <input type="checkbox" id="business-stays" name="categories[]" value="Business Stays" class="form-check-input me-2">
+                            <label for="business-stays" class="form-check-label d-flex align-items-center">
+                                <i class="bi bi-briefcase me-2"></i>
+                                Business Stays
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-check d-flex align-items-center">
+                            <input type="checkbox" id="resorts-with-pools" name="categories[]" value="Resorts with Pools" class="form-check-input me-2">
+                            <label for="resorts-with-pools" class="form-check-label d-flex align-items-center">
+                                <i class="bi bi-water me-2"></i>
+                                Resorts with Pools
+                            </label>
+                        </div>
+                    </div>
+                    <br> 
+
+                </div>
+            </div>
+        <br>
+        
+        <div>
+            <button class="btn btn-dark">Add</button>
+            <br><br>
+        </div>
+    </form>
+    </div>
+</div>
+    
+    
+    
+</body>
